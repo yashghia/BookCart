@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <jsp:include page="/common/header.jsp" />
 <h1>Are you sure you want to delete this Book?</h1>
+    <p><b>${message}</b></p>
         
         <label>Book ID:</label>${book.bookId}
         <br>

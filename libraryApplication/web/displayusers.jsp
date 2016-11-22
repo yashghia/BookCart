@@ -11,7 +11,7 @@
 <section>
 <table>
     <h1>Assign Administrative Privilege</h1>
-    <p><i>${message}</i></p> 
+        <p><b>${message}</b></p>
   <tr>
     <th>First Name</th>
     <th>Last Name</th>

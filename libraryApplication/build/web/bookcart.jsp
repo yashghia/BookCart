@@ -10,6 +10,7 @@
 
 <section>
     <h1>Your cart</h1>
+    <p><b>${message}</b></p>
 <table>
   <tr>
     <th>Quantity</th>
@@ -34,11 +35,11 @@
     <td>${books.book.priceCurrencyFormat}</td>
     <td>${books.totalCurrencyFormat}</td>
     <td>
-      <form action="" method="post">
-        <input type="hidden" name="productCode" 
+      <form action="books" method="post">
+        <input type="hidden" name="bookCode" 
                value="<c:out value='${books.book.bookId}'/>">
         <input type="hidden" name="quantity" value="0">
-        <input type="submit" value="Remove Item">
+        <input type="submit" value="Remove Item" name="action">
       </form>
     </td>
   </tr>
@@ -53,9 +54,9 @@
   <input type="submit" value="Add More Books">
 </form>
 
-<form action="" method="post">
+<form action="books" method="post">
   <input type="hidden" name="action" value="checkout">
-  <input type="submit" value="Checkout">
+  <input type="submit" value="Checkout" name="action">
 </form>
 </section>
 <jsp:include page="/common/footer.jsp" />

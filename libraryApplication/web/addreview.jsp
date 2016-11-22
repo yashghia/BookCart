@@ -9,6 +9,7 @@
 <jsp:include page="/common/header.jsp" />
 <section>
     <h1>Add review for the book</h1>
+        <p><b>${message}</b></p>
 <form action="books" method="post">
 <label class="pad_top">Book Id:</label>
 <input type="text" name="bookId" value="${book.bookId}" 

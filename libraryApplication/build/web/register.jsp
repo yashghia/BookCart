@@ -9,7 +9,7 @@
 <jsp:include page="/common/header.jsp" />
 <section>
      <h1>Registration form</h1>
-     <p><i>${message}</i></p>
+         <p><b>${message}</b></p>
 <form method="post" action="register">
             <label>Email ID:</label>
             <input type="email" name="un" required/><br>	

@@ -8,8 +8,8 @@
 <!DOCTYPE html>
 <jsp:include page="/common/header.jsp" />
 <section>
-     <h1>Enter your emailid and new password</h1>
-     <p><i>${message}</i></p>
+     <h1>Enter your Email Id and new password</h1>
+         <p><b>${message}</b></p>
 <form method="post" action="login">
             <label>Email ID:</label>
             <input type="email" name="un" required/><br>	

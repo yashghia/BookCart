@@ -9,7 +9,7 @@
 <jsp:include page="/common/header.jsp" />
 
 <section>
-    <p>${message}</p>
+        <p><b>${message}</b></p>
 <table>
 
   <tr>

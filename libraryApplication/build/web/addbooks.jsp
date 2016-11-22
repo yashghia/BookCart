@@ -9,6 +9,7 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/common/header.jsp" />
   <h1>Add or update book details</h1>
+      <p><b>${message}</b></p>
     <form action="books" method="post">
         <!--<input type="hidden" name="action" value="update_user">    --> 
         <c:if test="${IsAdd == false}">
@@ -26,7 +27,7 @@
         <input type="text" name="genre" value="${book.bookGenre}">
         <br>
         <label class="pad_top">Price:</label>
-        <input type="text" name="genre" value="${book.price}">
+        <input type="text" name="price" value="${book.price}">
         <br>
         <label>&nbsp;</label>
         <c:if test="${IsAdd == false}">

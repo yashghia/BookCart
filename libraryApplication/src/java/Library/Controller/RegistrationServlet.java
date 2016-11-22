@@ -7,12 +7,10 @@ package Library.Controller;
 
 import Library.Models.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +22,6 @@ import javax.mail.MessagingException;
  *
  * @author yash_
  */
-//@WebServlet(name = "RegistrationServlet", urlPatterns = {"/RegistrationServlet"})
 public class RegistrationServlet extends HttpServlet {
 
     @Override
@@ -91,10 +88,10 @@ public class RegistrationServlet extends HttpServlet {
     //Method to send mail 
     public void sendMail(String email,String firstName,HttpServletRequest request){
             String to = email;
-            String from = "email_list@murach.com";
+            String from = "NbadProject@UNCC.com";
             String subject = "Welcome to our email list";
             String body = "Dear " + firstName + ",\n\n"
-                    + "Thanks for joining Library management website. We'll make sure to send "
+                    + "Thanks for joining BookCart website. We'll make sure to send "
                     + "you announcements about new products and promotions.\n"
                     + "Have a great day and thanks again!\n\n";
             boolean isBodyHTML = false;

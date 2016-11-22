@@ -10,7 +10,7 @@
 
 <section>
     <h1>Login Form</h1>
-    <p><i>${message}</i></p>
+        <p><b>${message}</b></p>
         <form action="login" method="post">
             <label>Username:</label>
             <input type="text" name="un" required/><br>	
