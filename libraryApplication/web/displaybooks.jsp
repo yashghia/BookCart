@@ -16,7 +16,8 @@
       <th>Book ID</th>
       <th>Book Name</th>
       <th>Book Author</th>
-      <th colspan="3">Book Genre</th>
+      <th>Book Genre</th>
+      <th colspan="3">Book Price</th>
   </tr>
 
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -26,6 +27,7 @@
     <td>${book.bookName}</td>
     <td>${book.bookAuthor}</td>
     <td>${book.bookGenre}</td>
+    <td>${book.price}</td>
     <c:if test="${user.admin == true}">
     <td><a href="books?action=Update&amp;bookId=${book.bookId}">Update</a></td>
     <td><a href="books?action=Delete&amp;bookId=${book.bookId}">Delete</a></td>

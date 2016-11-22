@@ -19,7 +19,7 @@
             <input type="password" name="pw" required/>
             <br><br>
             <label>&nbsp;</label>
-            <input type="submit" value="submit">
+            <input type="submit" value="Login" name="action">
             <br>
             <p>New User?  <a href="register.jsp">Register Here</a></p>
             <p>Forgot Password? <a href="forgotpassword.jsp">Click Here</a></p>    

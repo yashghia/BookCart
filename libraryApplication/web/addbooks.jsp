@@ -25,6 +25,9 @@
          <label class="pad_top">Genre:</label>
         <input type="text" name="genre" value="${book.bookGenre}">
         <br>
+        <label class="pad_top">Price:</label>
+        <input type="text" name="genre" value="${book.price}">
+        <br>
         <label>&nbsp;</label>
         <c:if test="${IsAdd == false}">
             <input type="submit" value="Update" name="action" class="margin_left">

@@ -19,7 +19,7 @@
     <th></th>
   </tr>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:forEach var="books" items="${cart.books}">
+<c:forEach var="books" items="${cart.items}">
   <tr>
     <td>
       <form action="" method="post">
@@ -48,8 +48,8 @@
 <p><b>To change the quantity</b>, enter the new quantity 
       and click on the Update button.</p>
   
-<form action="" method="post">
-  <input type="hidden" name="action" value="books">
+<form action="books" method="post">
+  <input type="hidden" name="action" value="Add More Books">
   <input type="submit" value="Add More Books">
 </form>
 

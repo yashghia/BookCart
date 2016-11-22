@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Library.Data.*;
 import static Library.Data.UserDB.loginValidation;
+import Library.Utility.Utility;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -34,6 +35,23 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String url ="";
         try{
+       String action = request.getParameter("action");
+       if(action.equals("Submit"))
+       {
+        String email = (request.getParameter("un"));
+        String password = (request.getParameter("pw"));
+        Utility.checkPasswordStrength(password);
+        String salt = Utility.getSalt();
+        String hashpass= Utility.hashAndSaltPassword(password, salt);
+        UserDB.resetPassword(email,hashpass,salt);
+        request.setAttribute("message", "Password is reset successfully!!! Please login using new credentials");
+            url="/login.jsp";
+            getServletContext()
+                .getRequestDispatcher(url)
+                .forward(request, response);
+        }
+       else
+       {
         User user = new User();
         user.setEmailId(request.getParameter("un"));
         user.setPassword(request.getParameter("pw"));
@@ -69,10 +87,16 @@ public class LoginServlet extends HttpServlet {
                 .getRequestDispatcher(url)
                 .forward(request, response);
         } 
+       }
         }
         catch (Exception ex) 
         {
-        System.out.println("Log In failed: An Exception has occurred! " + ex);
+            request.setAttribute("message", ex.getMessage());
+            url = "/login.jsp";
+            getServletContext()
+                .getRequestDispatcher(url)
+                .forward(request, response);
+        //System.out.println("Log In failed: An Exception has occurred! " + ex);
         }
         }
     @Override

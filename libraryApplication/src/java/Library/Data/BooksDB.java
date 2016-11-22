@@ -64,6 +64,7 @@ public class BooksDB {
                 book.setBookName(rs.getString("bookname"));
                 book.setBookAuthor(rs.getString("bookauthor"));
                 book.setBookGenre(rs.getString("bookgenre"));
+                book.setPrice(rs.getInt("bookprice"));
                 books.add(book);
             }
             return books;
@@ -95,6 +96,7 @@ public class BooksDB {
                 book.setBookName(rs.getString("bookname"));
                 book.setBookAuthor(rs.getString("bookauthor"));
                 book.setBookGenre(rs.getString("bookgenre"));
+                book.setPrice(rs.getInt("bookprice"));
             }
             return book;
         } catch (SQLException e) {
@@ -114,13 +116,14 @@ public class BooksDB {
         int rowcount = 0;
         
         String insertQuery =
-               "Insert into books(bookname,bookauthor,bookgenre) "
-                + "values(?,?,?)";
+               "Insert into books(bookname,bookauthor,bookgenre,bookprice) "
+                + "values(?,?,?,?)";
         try {
             ps = connection.prepareStatement(insertQuery);
             ps.setString(1, book.getBookName());
             ps.setString(2, book.getBookAuthor());
             ps.setString(3, book.getBookGenre());
+            ps.setInt(4, book.getPrice());
             rowcount = ps.executeUpdate();
             
             return rowcount;
@@ -141,14 +144,16 @@ public class BooksDB {
         String updateQuery = "UPDATE books SET "               
                 + "bookname = ?, "
                 + "bookauthor =?, "
-                + "bookgenre =? "
+                + "bookgenre =?, "
+                + "bookprice = ? "
                 + "WHERE bookid = ?";
         try {
             ps = connection.prepareStatement(updateQuery);
             ps.setString(1, book.getBookName());
             ps.setString(2, book.getBookAuthor());
             ps.setString(3, book.getBookGenre());
-            ps.setInt(4, book.getBookId());
+            ps.setInt(4, book.getPrice());
+            ps.setInt(5, book.getBookId());
             updatecount = ps.executeUpdate();
             return updatecount;
         } catch (SQLException e) {

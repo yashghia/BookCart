@@ -68,6 +68,29 @@ public class UserDB {
             pool.freeConnection(connection);
         }
     }
+    
+    public static void resetPassword(String username,String password,String salt) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String query = "UPDATE User SET password=?,salt=? where emailid = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, password);
+            ps.setString(2, salt);
+            ps.setString(3, username);
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println(e);
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
 
     public static User selectUser(User user) {
         ConnectionPool pool = ConnectionPool.getInstance();

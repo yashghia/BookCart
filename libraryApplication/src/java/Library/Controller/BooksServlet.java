@@ -129,6 +129,7 @@ public class BooksServlet extends HttpServlet {
             } else if (quantity == 0) {
                 cart.removeItem(cartItem);
             }
+            session.setAttribute("cart", cart);
             getServletContext()
                     .getRequestDispatcher(url)
                     .forward(request, response); 
@@ -188,7 +189,7 @@ public class BooksServlet extends HttpServlet {
                     .getRequestDispatcher(url)
                     .forward(request, response);  
        }
-       else if(action.equals("Go Back"))
+       else if(action.equals("Go Back")||action.equals("Add More Books"))
         {
             request.setAttribute("books", BooksDB.selectBooks());
             getServletContext()
@@ -208,7 +209,42 @@ public class BooksServlet extends HttpServlet {
                     .getRequestDispatcher(url)
                     .forward(request, response);  
         }
-       
+       else if(action.equals("Add to Cart")){
+            url = "/bookcart.jsp";
+            int bookid = Integer.parseInt(request.getParameter("bookId"));
+            String quantityString = request.getParameter("quantity");
+
+            HttpSession session = request.getSession();
+            BookCart cart = (BookCart) session.getAttribute("cart");
+            if (cart == null) {
+                cart = new BookCart();
+            }
+             //if the user enters a negative or invalid quantity,
+            //the quantity is automatically reset to 1.
+            int quantity;
+            try {
+                quantity = Integer.parseInt(quantityString);
+                if (quantity < 0) {
+                    quantity = 1;
+                }
+            } catch (NumberFormatException nfe) {
+                quantity = 1;
+            }
+
+            Book book = BooksDB.selectBook(bookid);
+            CartItem cartItem = new CartItem();
+            cartItem.setBook(book);
+            cartItem.setQuantity(quantity);
+            if (quantity > 0) {
+                cart.addItem(cartItem);
+            } else if (quantity == 0) {
+                cart.removeItem(cartItem);
+            }
+            session.setAttribute("cart", cart);
+            getServletContext()
+                    .getRequestDispatcher(url)
+                    .forward(request, response); 
+       }
         }
         catch (Exception ex) 
         {
