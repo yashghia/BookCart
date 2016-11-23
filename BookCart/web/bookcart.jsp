@@ -7,11 +7,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <jsp:include page="/common/header.jsp" />
-
-<section>
-    <h1>Your cart</h1>
+    
+    <div class="panel panel-primary">
+    <div class="panel-heading">
+        <table class="table">
+            <thead><h2>Your cart</h2></thead>
     <p><b>${message}</b></p>
-<table>
   <tr>
     <th>Quantity</th>
     <th>Book Name</th>
@@ -23,23 +24,23 @@
 <c:forEach var="books" items="${cart.items}">
   <tr>
     <td>
-      <form action="" method="post">
+      <form action="" method="post" class="form-horizontal">
         <input type="hidden" name="bookid" 
                value="<c:out value='${books.book.bookId}'/>">
         <input type=text name="quantity" 
                value="<c:out value='${books.quantity}'/>" id="quantity">
-        <input type="submit" value="Update">
+        <input type="submit" value="Update" class="btn btn-primary">
       </form>
     </td>
     <td><c:out value='${books.book.bookName}'/></td>
     <td>${books.book.priceCurrencyFormat}</td>
     <td>${books.totalCurrencyFormat}</td>
     <td>
-      <form action="books" method="post">
+      <form action="books" method="post" class="form-horizontal">
         <input type="hidden" name="bookCode" 
                value="<c:out value='${books.book.bookId}'/>">
         <input type="hidden" name="quantity" value="0">
-        <input type="submit" value="Remove Item" name="action">
+        <input type="submit" value="Remove Item" name="action" class="btn btn-primary">
       </form>
     </td>
   </tr>
@@ -49,14 +50,15 @@
 <p><b>To change the quantity</b>, enter the new quantity 
       and click on the Update button.</p>
   
-<form action="books" method="post">
+<form action="books" method="post" class="form-horizontal">
   <input type="hidden" name="action" value="Add More Books">
-  <input type="submit" value="Add More Books">
+  <input type="submit" value="Add More Books" class="btn btn-primary">
 </form>
 
-<form action="books" method="post">
+<form action="books" method="post" class="form-horizontal">
   <input type="hidden" name="action" value="checkout">
-  <input type="submit" value="Checkout" name="action">
+  <input type="submit" value="Checkout" name="action"  class="btn btn-primary">
 </form>
-</section>
+    </div>
+    </div>
 <jsp:include page="/common/footer.jsp" />

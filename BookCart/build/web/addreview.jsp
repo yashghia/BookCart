@@ -6,26 +6,40 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<jsp:include page="/common/header.jsp" />
-<section>
-    <h1>Add review for the book</h1>
-        <p><b>${message}</b></p>
-<form action="books" method="post">
-<label class="pad_top">Book Id:</label>
-<input type="text" name="bookId" value="${book.bookId}" 
-       readonly><br><br>
-<label class="pad_top">Book Name:</label>
-<input type="text" name="bookName" value="${book.bookName}" 
-       readonly><br><br>
-<label class="pad_top">Review:</label>
-<input type="text" name="review"/>
-<br>
-<br>
-<input type="hidden" value="${user.emailId}" name ="emailId">
-<label>&nbsp;</label>
-            <input type="submit" value="Submit Review" name="action" >
-            <br>
-    </form>
-</section>
 
+<jsp:include page="/common/header.jsp" />
+        <p><b>${message}</b></p>
+<br>
+<div class ="center-block" style="text-align: center" >
+    <label><h2>Add Review for the Book</h2></label>
+</div>
+<form action="books" method="post" class="form-horizontals">
+    <div class="form-group">
+            <label class="col-sm-4 control-label"></label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="bookId" value="${book.bookId}" readonly placeholder="Book ID"/>	
+            </div>
+            </div>
+            <br><br><br>
+    <div class="form-group">
+            <label class="col-sm-4 control-label"></label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="bookName" value="${book.bookName}" readonly placeholder="Book Name"/>	
+            </div>
+            </div>
+            <br><br>
+    <div class="form-group">
+            <label class="col-sm-4 control-label"></label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="review" placeholder="Review"/>	
+            </div>
+            </div>
+            <br><br>
+<input type="hidden" value="${user.emailId}" name ="emailId">
+<div class="col-sm-offset-5 col-sm-10">
+<label>&nbsp;</label>
+            <input type="submit" value="Submit Review" name="action" class="btn btn-primary">
+            <br>
+</div>
+    </form>
 <jsp:include page="/common/footer.jsp" />

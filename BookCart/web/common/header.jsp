@@ -28,7 +28,7 @@
                     <c:out value="Welcome, ${user.firstName}"
                 </ul>
                 <ul class="right">
-                    <li><a class="btn btn-link" href="/login?action=logout">Logout</a></li>
+                    <li><a class="btn btn-link" href="/BookCart/login?action=logout">Logout</a></li>
                 </ul>
             </c:if>
         </nav>

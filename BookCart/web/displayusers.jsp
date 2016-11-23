@@ -7,11 +7,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <jsp:include page="/common/header.jsp" />
-
-<section>
-<table>
-    <h1>Assign Administrative Privilege</h1>
-        <p><b>${message}</b></p>
+ 
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        
+<table class="table">
+    <thead><h2>Assign Administrative Privilege</h2></thead>
+       <p><b>${message}</b></p>
   <tr>
     <th>First Name</th>
     <th>Last Name</th>
@@ -25,14 +27,15 @@
     <td>${person.lastName}</td>
     <td>${person.emailId}</td>
     <c:if test="${person.admin == false}">
-    <td><a href="books?action=admin&amp;emailid=${person.emailId}">Assign Administrative Access</a></td>
+    <td><a class="btn btn-link" href="books?action=admin&amp;emailid=${person.emailId}">Assign Administrative Access</a></td>
     </c:if>
   </tr>
   </c:forEach>
 </table>
   <br>
-  <form action="books" method="POST">
-  <input type="submit" value="Go Back" name="action"  class="margin_left">
-  </form>
-</section>   
+  <form action="books" method="POST" class="form-horizontal">
+  <input type="submit" value="Go Back" name="action" class="btn btn-primary">
+  </form>   
+    </div>
+</div>
   <jsp:include page="/common/footer.jsp" />

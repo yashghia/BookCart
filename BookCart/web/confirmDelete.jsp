@@ -7,21 +7,34 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <jsp:include page="/common/header.jsp" />
-<h1>Are you sure you want to delete this Book?</h1>
-    <p><b>${message}</b></p>
-        
-        <label>Book ID:</label>${book.bookId}
-        <br>
-        <label>Book Name:</label>${book.bookName}
-        <br>
-        <label>Book Author:</label>${book.bookAuthor}
-        <br>
-        <label>Genre:</label>${book.bookGenre}
-        <br>
+      <p><b>${message}</b></p>
+<br>
+<div class ="center-block" style="text-align: center" >
+    <label><h2>Are you sure you want to delete this Book?</h2></label>
+</div>   
+<br>
+<br>
+ <div class="col-sm-offset-4 col-sm-10">
+<div class="form-group">
+            <label class="col-sm-4 control-label">Book ID:</label>${book.bookId}
+            <br><br>
+</div>
+            <div class="form-group">
+        <label class="col-sm-4 control-label">Book Name:</label>${book.bookName}
+        <br><br>
+            </div>
+        <label class="col-sm-4 control-label">Book Author:</label>${book.bookAuthor}
+        <br><br>
+        <div class="form-group">
+        <label class="col-sm-4 control-label">Genre:</label>${book.bookGenre}
+        <br><br>
+        </div>
        <!-- Hint! You need to code a form for the 'Yes' button -->
-       <form action="books" method="POST">
-       <input type="submit" name="action" value="Yes">
+       <form action="books" method="POST" class="form-horizontals">
+       <input type="submit" name="action" value="Yes" class="btn btn-primary">
        <input type="hidden" name ="bookId" value="${book.bookId}">
-       <input type="submit" name="action" value="No">
+       <input type="submit" name="action" value="No" class="btn btn-primary">
        </form>
+ </div>
+
 <jsp:include page="/common/footer.jsp" />

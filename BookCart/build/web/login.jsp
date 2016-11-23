@@ -10,7 +10,7 @@
 <p><b>${message}</b></p>
 <br>
     <div class ="center-block" style="text-align: center" >
-        <label>Login Here</label>
+        <label><h2>Login Here</h2></label>
     </div>
     <br><br>
         <form class="form-horizontals" action="login" method="post">
@@ -34,9 +34,9 @@
             <br>
             <br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <p>New User?  <a href="register.jsp">Register Here</a></p>
+            <p>New User?  <a class="btn btn-link" href="register.jsp">Register Here</a></p>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <p>Forgot Password? <a href="forgotpassword.jsp">Click Here</a></p>    
+            <p>Forgot Password? <a class="btn btn-link" href="forgotpassword.jsp">Click Here</a></p>    
             </div>
         </form>
 <jsp:include page="/common/footer.jsp" />

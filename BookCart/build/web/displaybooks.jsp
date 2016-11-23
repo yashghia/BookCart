@@ -8,10 +8,12 @@
 <!DOCTYPE html>
 <jsp:include page="/common/header.jsp" />
 
-<section>
+            
+    <div class="panel panel-primary">
+    <div class="panel-heading">
+        <table class="table">
         <p><b>${message}</b></p>
-<table>
-
+         <thead><h2>Books Available</h2></thead>
   <tr>
       <th>Book ID</th>
       <th>Book Name</th>
@@ -29,25 +31,26 @@
     <td>${book.bookGenre}</td>
     <td>${book.price}</td>
     <c:if test="${user.admin == true}">
-    <td><a href="books?action=Update&amp;bookId=${book.bookId}">Update</a></td>
-    <td><a href="books?action=Delete&amp;bookId=${book.bookId}">Delete</a></td>
+    <td><a class="btn btn-link" href="books?action=Update&amp;bookId=${book.bookId}">Update</a></td>
+    <td><a class="btn btn-link" href="books?action=Delete&amp;bookId=${book.bookId}">Delete</a></td>
     </c:if>
     <c:if test="${user.admin == false}">
-    <td><a href="books?action=Add to Cart&amp;bookId=${book.bookId}">Add to Cart</a></td>
-    <td><a href="books?action=Add Review&amp;bookId=${book.bookId}">Add Review</a></td>
+    <td><a class="btn btn-link" href="books?action=Add to Cart&amp;bookId=${book.bookId}">Add to Cart</a></td>
+    <td><a class="btn btn-link" href="books?action=Add Review&amp;bookId=${book.bookId}">Add Review</a></td>
     </c:if>
   </tr>
   </c:forEach>
 </table>
   <c:if test="${user.admin == true}">
     <br>
-    <form action="books" method="get">
-      <input type="submit" value="Add Book" name="action"><br>
+    <form action="books" method="get" class="form-horizontal">
+      <input type="submit" value="Add Book" name="action" class="btn btn-primary"><br>
     </form>
     <br>
-    <form action="books" method="get">
-        <input type="submit" value="Assign Admin Role" name="action"><br>
+    <form action="books" method="get" class="form-horizontal">
+        <input type="submit" value="Assign Admin Role" name="action" class="btn btn-primary"><br>
     </form>
   </c:if>
-</section>   
+    </div>
+    </div>
 <jsp:include page="/common/footer.jsp" />
