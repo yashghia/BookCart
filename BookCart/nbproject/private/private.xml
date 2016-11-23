@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/F:/GIT/BookCart/libraryApplication/web/login.jsp</file>
+            <file>file:/F:/GIT/BookCart/libraryApplication/web/confirmDelete.jsp</file>
+            <file>file:/F:/GIT/BookCart/libraryApplication/src/java/Library/Data/BooksDB.java</file>
+            <file>file:/F:/GIT/BookCart/libraryApplication/web/register.jsp</file>
+            <file>file:/F:/GIT/BookCart/libraryApplication/web/displaybooks.jsp</file>
+            <file>file:/F:/GIT/BookCart/libraryApplication/src/java/Library/Controller/RegistrationServlet.java</file>
+            <file>file:/F:/GIT/BookCart/libraryApplication/web/WEB-INF/web.xml</file>
+            <file>file:/F:/GIT/BookCart/libraryApplication/web/forgotpassword.jsp</file>
+            <file>file:/F:/GIT/BookCart/libraryApplication/web/addbooks.jsp</file>
+            <file>file:/F:/GIT/BookCart/libraryApplication/web/META-INF/context.xml</file>
+            <file>file:/F:/GIT/BookCart/libraryApplication/src/java/Library/Data/DBUtil.java</file>
+            <file>file:/F:/GIT/BookCart/libraryApplication/src/java/Library/Controller/BooksServlet.java</file>
+            <file>file:/F:/GIT/BookCart/libraryApplication/src/java/Library/Data/ConnectionPool.java</file>
+            <file>file:/F:/GIT/BookCart/libraryApplication/src/java/Library/Controller/LoginServlet.java</file>
+            <file>file:/F:/GIT/BookCart/libraryApplication/src/java/Library/Utility/Utility.java</file>
+            <file>file:/F:/GIT/BookCart/libraryApplication/web/addreview.jsp</file>
+            <file>file:/F:/GIT/BookCart/libraryApplication/src/java/Library/Data/UserDB.java</file>
+            <file>file:/F:/GIT/BookCart/libraryApplication/web/bookcart.jsp</file>
+            <file>file:/F:/GIT/BookCart/libraryApplication/web/displayusers.jsp</file>
+        </group>
+    </open-files>
+</project-private>
