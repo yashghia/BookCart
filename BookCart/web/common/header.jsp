@@ -23,13 +23,8 @@
 <body>
     <div id="header">
         <nav id ="header_menu">
-            <c:if test="${user.firstName}">
-                <ul class="right">
-                    <c:out value="Welcome, ${user.firstName}"
-                </ul>
                 <ul class="right">
                     <li><a class="btn btn-default" href="/BookCart/login?action=logout">Logout</a></li>
                 </ul>
-            </c:if>
         </nav>
     </div>

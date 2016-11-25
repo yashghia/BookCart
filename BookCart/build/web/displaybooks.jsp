@@ -41,7 +41,7 @@
   </tr>
   </c:forEach>
         </table>
-            
+    <c:if test="${user.admin == false}">        
       <div class="panel-heading">
         <h2>Book Reviews added by you</h2>
             </div>
@@ -58,6 +58,7 @@
         </c:forEach>
     </table>
   <br><br>
+  </c:if>
 <p><b>${message}</b></p>
   <c:if test="${user.admin == true}">
     <br>
