@@ -89,7 +89,8 @@ public class BooksServlet extends HttpServlet {
        }
          else if(action.equals("admin")){
             String emailid = request.getParameter("emailid");
-            UserDB.provideAdminPrivilege(emailid);
+            int admin = Integer.parseInt(request.getParameter("admin"));
+            UserDB.provideAdminPrivilege(emailid,admin);
             List<User> users = new ArrayList<User>();
             url="/displayusers.jsp";
             users = UserDB.selectUsers();
@@ -148,6 +149,9 @@ public class BooksServlet extends HttpServlet {
         try{
        String url = "/displaybooks.jsp";
        String action = request.getParameter("action");
+       HttpSession session = request.getSession(true);
+       User user = (User)session.getAttribute("user");
+       List<BookReview> bookreviews = new ArrayList<BookReview>();
        if(action.equals("Add"))
         {
             Book book = new Book();
@@ -157,6 +161,8 @@ public class BooksServlet extends HttpServlet {
             book.setPrice(Integer.parseInt(request.getParameter("price")));
             BooksDB.insertBook(book);
             request.setAttribute("books", BooksDB.selectBooks());
+            bookreviews = BooksDB.selectBookReview(user.getEmailId());
+            request.setAttribute("reviews", bookreviews);
             getServletContext()
                     .getRequestDispatcher(url)
                     .forward(request, response);  
@@ -171,6 +177,8 @@ public class BooksServlet extends HttpServlet {
             book.setPrice(Integer.parseInt(request.getParameter("price")));
             BooksDB.updateBook(book);
             request.setAttribute("books", BooksDB.selectBooks());
+            bookreviews = BooksDB.selectBookReview(user.getEmailId());
+            request.setAttribute("reviews", bookreviews);
             getServletContext()
                     .getRequestDispatcher(url)
                     .forward(request, response);  
@@ -180,6 +188,8 @@ public class BooksServlet extends HttpServlet {
             int bookid = Integer.parseInt(request.getParameter("bookId"));
             BooksDB.deletebook(bookid);
             request.setAttribute("books", BooksDB.selectBooks());
+            bookreviews = BooksDB.selectBookReview(user.getEmailId());
+            request.setAttribute("reviews", bookreviews);
             getServletContext()
                     .getRequestDispatcher(url)
                     .forward(request, response);  
@@ -188,6 +198,8 @@ public class BooksServlet extends HttpServlet {
        {
            url = "/displaybooks.jsp";
             request.setAttribute("books", BooksDB.selectBooks());
+            bookreviews = BooksDB.selectBookReview(user.getEmailId());
+            request.setAttribute("reviews", bookreviews);
             getServletContext()
                     .getRequestDispatcher(url)
                     .forward(request, response);  
@@ -195,6 +207,8 @@ public class BooksServlet extends HttpServlet {
        else if(action.equals("Go Back")||action.equals("Add More Books"))
         {
             request.setAttribute("books", BooksDB.selectBooks());
+            bookreviews = BooksDB.selectBookReview(user.getEmailId());
+            request.setAttribute("reviews", bookreviews);
             getServletContext()
                     .getRequestDispatcher(url)
                     .forward(request, response);  
@@ -208,6 +222,8 @@ public class BooksServlet extends HttpServlet {
             BooksDB.addReview(bookid,bookname,emailId,review);
             request.setAttribute("message", "Review added successfully");
             request.setAttribute("books", BooksDB.selectBooks());
+            bookreviews = BooksDB.selectBookReview(user.getEmailId());
+            request.setAttribute("reviews", bookreviews);
             getServletContext()
                     .getRequestDispatcher(url)
                     .forward(request, response);  
@@ -217,8 +233,6 @@ public class BooksServlet extends HttpServlet {
             int bookid = Integer.parseInt(request.getParameter("bookId"));
             //int deletebookid = Integer.parseInt(request.getParameter("deletebook"));
             String quantityString = request.getParameter("quantity");
-
-            HttpSession session = request.getSession();
             BookCart cart = (BookCart) session.getAttribute("cart");
             if (cart == null) {
                 cart = new BookCart();
@@ -255,7 +269,6 @@ public class BooksServlet extends HttpServlet {
             //int deletebookid = Integer.parseInt(request.getParameter("deletebook"));
             String quantityString = request.getParameter("quantity");
 
-            HttpSession session = request.getSession();
             BookCart cart = (BookCart) session.getAttribute("cart");
             if (cart == null) {
                 cart = new BookCart();
@@ -287,9 +300,7 @@ public class BooksServlet extends HttpServlet {
                     .forward(request, response); 
        }
        else if(action.equals("checkout")){
-           HttpSession session = request.getSession();
            request.setAttribute("message","You have successfully checked out books and confirmation email is sent!!!");
-           User user = (User) session.getAttribute("user");
            sendOrderConfirmationMail(user.getEmailId(),user.getFirstName(),request);
            session.setAttribute("cart", new BookCart());
            url = "/bookcart.jsp";

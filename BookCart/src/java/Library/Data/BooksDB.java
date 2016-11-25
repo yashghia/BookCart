@@ -22,6 +22,37 @@ import Library.Models.Book;
  */
 public class BooksDB {
     
+    public static List<BookReview> selectBookReview(String emailID) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        List<BookReview> reviews = new ArrayList<BookReview>();
+        
+        ResultSet rs = null;
+        
+        String searchQuery =
+               "select * from books_review where emailId = ?";
+        try {
+           ps = connection.prepareStatement(searchQuery);
+            ps.setString(1,emailID);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                BookReview review = new BookReview();
+                review.setBookId(rs.getInt("bookid"));
+                review.setBookName(rs.getString("bookname"));
+                review.setReview(rs.getString("review"));
+                reviews.add(review);
+            }
+            return reviews;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            pool.freeConnection(connection);
+        }
+    }
+    
      public static int addReview(int bookid,String bookname,String emailid,String review ) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection(); 

@@ -11,7 +11,7 @@ table, th, td{
     border:1px solid black;
     padding: 1em;
     border-collapse: collapse;
-
+    color: black;
 }
 
 th{
@@ -21,6 +21,7 @@ th{
 }
 tr:nth-child(even) {
     background-color: #D3D3CF;
+    color: black;
 }
 tr:nth-child(odd) {
     background-color: whitesmoke;
@@ -46,7 +47,6 @@ nav ul{
     padding:0;
 
 }
-
 /* header.jsp ********************************/
 
 nav#header_menu ul.right li a {
@@ -92,7 +92,7 @@ nav .left{
 nav .left a{
   font-weight: bold;
   font-size:20px;
-  color: #333465;
+
 }
 
 nav .right{
@@ -196,3 +196,16 @@ nav#menu ul li a {
     display: block;
     margin: auto;
   }
+  
+.my-container {
+    position: relative;
+    overflow: hidden;
+}
+.my-container img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0.6;
+}

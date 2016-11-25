@@ -7,11 +7,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <jsp:include page="/common/header.jsp" />
-<p><b>${message}</b></p>
+<div class ="my-container">
+    <img src="/BookCart/images/books.jpg">
+
 <br>
     <div class ="center-block" style="text-align: center" >
         <label><h2>Login Here</h2></label>
     </div>
+
     <br><br>
         <form class="form-horizontals" action="login" method="post">
             <div class="form-group">
@@ -36,7 +39,12 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <p>New User?  <a class="btn btn-link" href="register.jsp">Register Here</a></p>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <p>Forgot Password? <a class="btn btn-link" href="forgotpassword.jsp">Click Here</a></p>    
+            <p>Forgot Password? <a class="btn btn-link" href="forgotpassword.jsp">Click Here</a></p>  
+            <br>
+            <p><b>${message}</b></p>
+            <br><br><br><br><br><br><br><br><br><br>
             </div>
         </form>
+    
+    </div>
 <jsp:include page="/common/footer.jsp" />

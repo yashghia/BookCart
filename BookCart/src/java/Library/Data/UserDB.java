@@ -48,13 +48,20 @@ public class UserDB {
         }
     }
 
-    public static void provideAdminPrivilege(String emailid) {
+    public static void provideAdminPrivilege(String emailid,int admin) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-
-        String query = "UPDATE User SET admin = true where emailid = ?";
+        String query="";
+        if(admin==1)
+        {
+        query = "UPDATE User SET admin = true where emailid = ?";
+        }
+        else
+        {
+        query = "UPDATE User SET admin = false where emailid = ?";  
+        }
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, emailid);

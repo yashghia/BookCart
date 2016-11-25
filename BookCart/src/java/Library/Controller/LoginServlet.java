@@ -75,16 +75,18 @@ public class LoginServlet extends HttpServlet {
         user.setPassword(request.getParameter("pw"));
         user = UserDB.selectUser(user);
         List<Book> books = new ArrayList<Book>();
+        List<BookReview> bookreviews = new ArrayList<BookReview>();
         if (user.getIsAvailable())
         {
             if(loginValidation(user.getEmailId(),user.getPassword()))
             {
                 HttpSession session = request.getSession(true);	    
                 session.setAttribute("user",user); 
+                bookreviews = BooksDB.selectBookReview(user.getEmailId());
                 books = BooksDB.selectBooks();
                 request.setAttribute("books", books);
+                request.setAttribute("reviews", bookreviews);
                 url="/displaybooks.jsp";
-                //response.encodeRedirectURL(url);
                 getServletContext()
                         .getRequestDispatcher(url)
                         .forward(request, response);        

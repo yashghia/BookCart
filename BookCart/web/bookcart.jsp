@@ -10,9 +10,9 @@
     
     <div class="panel panel-primary">
     <div class="panel-heading">
-        <table class="table">
-            <thead><h2>Your cart</h2></thead>
-    <p><b>${message}</b></p>
+    <h2>Your Cart Items</h2>
+    </div>
+    <table class="table">
   <tr>
     <th>Quantity</th>
     <th>Book Name</th>
@@ -46,19 +46,19 @@
   </tr>
 </c:forEach>
 </table>
-
+<p><b>${message}</b></p>
+<br><br>
 <p><b>To change the quantity</b>, enter the new quantity 
       and click on the Update button.</p>
-  
+<br>
 <form action="books" method="post" class="form-horizontal">
   <input type="hidden" name="action" value="Add More Books">
   <input type="submit" value="Add More Books" class="btn btn-primary">
 </form>
-
+<br><br>
 <form action="books" method="post" class="form-horizontal">
   <input type="hidden" name="action" value="checkout">
   <input type="submit" value="Checkout" name="action"  class="btn btn-primary">
 </form>
-    </div>
     </div>
 <jsp:include page="/common/footer.jsp" />
