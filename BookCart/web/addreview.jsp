@@ -6,7 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <jsp:include page="/common/header.jsp" />
         <p><b>${message}</b></p>
 <br>

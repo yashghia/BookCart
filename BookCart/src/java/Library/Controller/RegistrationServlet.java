@@ -85,7 +85,7 @@ public class RegistrationServlet extends HttpServlet {
         }
         }
     
-    //Method to send mail 
+    //Method to send mail to new users for their successful registration
     public void sendMail(String email,String firstName,HttpServletRequest request){
             String to = email;
             String from = "NbadProject@UNCC.com";

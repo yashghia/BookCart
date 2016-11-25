@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
        catch(Exception ex)
                {
                request.setAttribute("message", ex.getMessage());
-            getServletContext()
+                getServletContext()
                 .getRequestDispatcher(url)
                 .forward(request, response);
                }
@@ -54,6 +54,8 @@ public class LoginServlet extends HttpServlet {
         String url ="";
         try{
        String action = request.getParameter("action");
+       
+       // below code is used when a user tries to reset his password
        if(action.equals("Submit"))
        {
         String email = (request.getParameter("un"));
@@ -69,6 +71,8 @@ public class LoginServlet extends HttpServlet {
                 .forward(request, response);
         }
        else
+           
+       //This code is used when user tries to login to the system, it has few validation checks
        {
         User user = new User();
         user.setEmailId(request.getParameter("un"));

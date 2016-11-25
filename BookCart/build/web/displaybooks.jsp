@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <jsp:include page="/common/header.jsp" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="panel panel-primary">
     <div class="panel-heading">
@@ -25,11 +26,11 @@
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <c:forEach var="book" items="${books}">
   <tr>
-    <td>${book.bookId}</td>
-    <td>${book.bookName}</td>
-    <td>${book.bookAuthor}</td>
-    <td>${book.bookGenre}</td>
-    <td>${book.priceCurrencyFormat}</td>
+    <td><c:out value="${book.bookId}"/></td>
+    <td><c:out value="${book.bookName}"/></td>
+    <td><c:out value="${book.bookAuthor}"/></td>
+    <td><c:out value="${book.bookGenre}"/></td>
+    <td><c:out value="${book.priceCurrencyFormat}"/></td>
     <c:if test="${user.admin == true}">
     <td><a class="btn btn-link" href="books?action=Update&amp;bookId=${book.bookId}">Update</a></td>
     <td><a class="btn btn-link" href="books?action=Delete&amp;bookId=${book.bookId}">Delete</a></td>
@@ -51,9 +52,9 @@
         <th>Book Review</th>
         <c:forEach var="review" items="${reviews}">
             <tr>
-                <td>${review.bookId}</td>
-                <td>${review.bookName}</td>
-                <td>${review.review}</td>
+                <td><c:out value="${review.bookId}"/></td>
+                <td><c:out value="${review.bookName}"/></td>
+                <td><c:out value="${review.review}"/></td>
             </tr>
         </c:forEach>
     </table>

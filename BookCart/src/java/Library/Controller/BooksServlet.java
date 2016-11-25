@@ -31,7 +31,7 @@ public class BooksServlet extends HttpServlet {
         String url="";
         String action = request.getParameter("action");
         
-        
+        //If the request is for adding new book.
         if(action.equals("Add Book"))
         {
             HttpSession session = request.getSession(true);	    
@@ -41,6 +41,8 @@ public class BooksServlet extends HttpServlet {
                     .getRequestDispatcher(url)
                     .forward(request, response);  
         }
+        
+        //If the request is to add review for a book.
         else if(action.equals("Add Review"))
         {
             Book book = new Book();
@@ -52,6 +54,8 @@ public class BooksServlet extends HttpServlet {
                     .getRequestDispatcher(url)
                     .forward(request, response); 
         }
+        
+        //If an admin tries to add another user as admin.
         else if(action.equals("Assign Admin Role"))
         {
             List<User> users = new ArrayList<User>();
@@ -62,6 +66,8 @@ public class BooksServlet extends HttpServlet {
                     .getRequestDispatcher(url)
                     .forward(request, response); 
         }
+        
+        //If an admin tries to modify details of a particular book.
         else if(action.equals("Update"))
        {
             Book book = new Book();
@@ -75,6 +81,8 @@ public class BooksServlet extends HttpServlet {
                     .getRequestDispatcher(url)
                     .forward(request, response);  
        }
+        
+        //If an admin tries to delete a particular book from the database.
          else if(action.equals("Delete"))
        {
             Book book = new Book();
@@ -85,8 +93,9 @@ public class BooksServlet extends HttpServlet {
             getServletContext()
                     .getRequestDispatcher(url)
                     .forward(request, response);  
-
        }
+         
+         //When an admin updates the user's administrative privileges
          else if(action.equals("admin")){
             String emailid = request.getParameter("emailid");
             int admin = Integer.parseInt(request.getParameter("admin"));
@@ -99,6 +108,8 @@ public class BooksServlet extends HttpServlet {
                     .getRequestDispatcher(url)
                     .forward(request, response); 
          }
+         
+         // When a user selects a book and add to their cart for checkout.
         else if(action.equals("Add to Cart")){
             url = "/bookcart.jsp";
             int bookid = Integer.parseInt(request.getParameter("bookId"));
@@ -136,13 +147,15 @@ public class BooksServlet extends HttpServlet {
                     .forward(request, response); 
        }
         }
+        
+        //Catch statement will catch any general acception thrown by above code
         catch (Exception ex) 
         {
-        System.out.println("Log In failed: An Exception has occurred! " + ex);
+        System.out.println("An Exception has occurred! :" + ex);
         }
     }
 
-   
+   // The below code will capture all the post requests from JSP pages.
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -188,8 +201,8 @@ public class BooksServlet extends HttpServlet {
             int bookid = Integer.parseInt(request.getParameter("bookId"));
             BooksDB.deletebook(bookid);
             request.setAttribute("books", BooksDB.selectBooks());
-            bookreviews = BooksDB.selectBookReview(user.getEmailId());
-            request.setAttribute("reviews", bookreviews);
+            //bookreviews = BooksDB.selectBookReview(user.getEmailId());
+            //request.setAttribute("reviews", bookreviews);
             getServletContext()
                     .getRequestDispatcher(url)
                     .forward(request, response);  
@@ -199,7 +212,7 @@ public class BooksServlet extends HttpServlet {
            url = "/displaybooks.jsp";
             request.setAttribute("books", BooksDB.selectBooks());
             bookreviews = BooksDB.selectBookReview(user.getEmailId());
-            request.setAttribute("reviews", bookreviews);
+            //request.setAttribute("reviews", bookreviews);
             getServletContext()
                     .getRequestDispatcher(url)
                     .forward(request, response);  
@@ -311,11 +324,11 @@ public class BooksServlet extends HttpServlet {
         }
         catch (Exception ex) 
         {
-        System.out.println("Log In failed: An Exception has occurred! " + ex);
+        System.out.println("An Exception has occurred! " + ex);
         }
     }
 
-    
+    // this is a user defined method which is used to send confirmation mail to user for their successfull purchase.
     public void sendOrderConfirmationMail(String email,String firstName,HttpServletRequest request){
             String to = email;
             String from = "NbadProject@UNCC.com";

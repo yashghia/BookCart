@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <jsp:include page="/common/header.jsp" />
- 
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h2>Assign Administrative Privilege</h2>
@@ -23,9 +23,9 @@
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <c:forEach var="person" items="${users}">
   <tr>
-    <td>${person.firstName}</td>
-    <td>${person.lastName}</td>
-    <td>${person.emailId}</td>
+    <td><c:out value="${person.firstName}"/></td>
+    <td><c:out value="${person.lastName}"/></td>
+    <td<c:out value="${person.emailId}"/></td>
     <c:if test="${person.admin == false}">
     <td><a class="btn btn-link" href="books?action=admin&amp;emailid=${person.emailId}&amp;admin=1">Assign Administrative Access</a></td>
     </c:if>

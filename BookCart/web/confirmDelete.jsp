@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/common/header.jsp" />
       <p><b>${message}</b></p>
 <br>
@@ -16,17 +17,17 @@
 <br>
  <div class="col-sm-offset-4 col-sm-10">
 <div class="form-group">
-            <label class="col-sm-4 control-label">Book ID:</label>${book.bookId}
+            <label class="col-sm-4 control-label">Book ID:</label><c:out value="${book.bookId}"/>
             <br><br>
 </div>
             <div class="form-group">
-        <label class="col-sm-4 control-label">Book Name:</label>${book.bookName}
+        <label class="col-sm-4 control-label">Book Name:</label><c:out value="${book.bookName}"/>
         <br><br>
             </div>
-        <label class="col-sm-4 control-label">Book Author:</label>${book.bookAuthor}
+        <label class="col-sm-4 control-label">Book Author:</label><c:out value="${book.bookAuthor}"/>
         <br><br>
         <div class="form-group">
-        <label class="col-sm-4 control-label">Genre:</label>${book.bookGenre}
+        <label class="col-sm-4 control-label">Genre:</label><c:out value="${book.bookGenre}"/>
         <br><br>
         </div>
        <!-- Hint! You need to code a form for the 'Yes' button -->

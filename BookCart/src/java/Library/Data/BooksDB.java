@@ -197,21 +197,33 @@ public class BooksDB {
      }
      
      public static int deletebook(int bookid){
-        PreparedStatement ps = null;
+        PreparedStatement ps_1 = null;
+        PreparedStatement ps_2 = null;
+        int deletecount = 0;
         ConnectionPool pool = ConnectionPool.getInstance();   
         Connection connection = pool.getConnection();
         String query = "DELETE FROM books "
                 + "WHERE bookid = ?";
+        String deleteQuery = "DELETE FROM books_review "
+                + "WHERE bookid = ?";
         try {
-            ps = connection.prepareStatement(query);
-            ps.setInt(1, bookid);
-
-            return ps.executeUpdate();
-        } catch (SQLException e) {
+            ps_1 = connection.prepareStatement(query);
+            ps_2 = connection.prepareStatement(deleteQuery);
+            ps_1.setInt(1, bookid);
+            ps_2.setInt(1, bookid);
+            
+            ps_1.executeUpdate();
+            ps_2.executeUpdate();
+            
+            return 1;
+        } 
+        catch (SQLException e) {
             System.out.println(e);
             return 0;
-        } finally {
-            DBUtil.closePreparedStatement(ps);
+        } 
+        finally {
+            DBUtil.closePreparedStatement(ps_1);
+            DBUtil.closePreparedStatement(ps_2);
             pool.freeConnection(connection);
         }
      }
