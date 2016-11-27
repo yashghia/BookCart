@@ -26,15 +26,16 @@ public class BooksServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String url="/displaybooks.jsp";
         try
         {
-        String url="";
         String action = request.getParameter("action");
-        
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        List<BookReview> bookreviews = new ArrayList<BookReview>();
         //If the request is for adding new book.
         if(action.equals("Add Book"))
         {
-            HttpSession session = request.getSession(true);	    
             session.setAttribute("IsAdd",true); 
             url="/addbooks.jsp";
             getServletContext()
@@ -48,6 +49,20 @@ public class BooksServlet extends HttpServlet {
             Book book = new Book();
             url="/addreview.jsp";
             int bookId = Integer.parseInt(request.getParameter("bookId"));
+            bookreviews = BooksDB.selectBookReview(user.getEmailId());
+            for(BookReview review :bookreviews)
+            {
+                if(review.getBookId()==bookId)
+                {
+                    url="/displaybooks.jsp";
+                    request.setAttribute("books", BooksDB.selectBooks());
+                    request.setAttribute("reviews", bookreviews);
+                    request.setAttribute("message","You have already added review for this book");
+                    getServletContext()
+                    .getRequestDispatcher(url)
+                    .forward(request, response); 
+                }
+            }
             book = BooksDB.selectBook(bookId);
             request.setAttribute("book", book);
             getServletContext()
@@ -72,8 +87,7 @@ public class BooksServlet extends HttpServlet {
        {
             Book book = new Book();
             book.setBookId(Integer.parseInt(request.getParameter("bookId")));
-            book = BooksDB.selectBook(book.getBookId());
-            HttpSession session = request.getSession(true);	    
+            book = BooksDB.selectBook(book.getBookId());    
             session.setAttribute("IsAdd",false); 
             request.setAttribute("book", book);
             url="/addbooks.jsp";
@@ -115,7 +129,7 @@ public class BooksServlet extends HttpServlet {
             int bookid = Integer.parseInt(request.getParameter("bookId"));
             String quantityString = request.getParameter("quantity");
 
-            HttpSession session = request.getSession();
+            
             BookCart cart = (BookCart) session.getAttribute("cart");
             if (cart == null) {
                 cart = new BookCart();
@@ -151,7 +165,11 @@ public class BooksServlet extends HttpServlet {
         //Catch statement will catch any general acception thrown by above code
         catch (Exception ex) 
         {
-        System.out.println("An Exception has occurred! :" + ex);
+        url="/displaybooks.jsp";
+        request.setAttribute("message","An Exception has occurred! :"+ex.getMessage());
+            getServletContext()
+                    .getRequestDispatcher(url)
+                    .forward(request, response); 
         }
     }
 
@@ -159,8 +177,8 @@ public class BooksServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String url = "/displaybooks.jsp";
         try{
-       String url = "/displaybooks.jsp";
        String action = request.getParameter("action");
        HttpSession session = request.getSession(true);
        User user = (User)session.getAttribute("user");
@@ -324,7 +342,10 @@ public class BooksServlet extends HttpServlet {
         }
         catch (Exception ex) 
         {
-        System.out.println("An Exception has occurred! " + ex);
+            request.setAttribute("message","An Exception has occurred! :"+ex.getMessage());
+            getServletContext()
+                    .getRequestDispatcher(url)
+                    .forward(request, response); 
         }
     }
 
@@ -345,11 +366,8 @@ public class BooksServlet extends HttpServlet {
             } catch (MessagingException e) {
                 String errorMessage
                         = "ERROR: Unable to send email. "
-                        + "Check Tomcat logs for details.<br>"
-                        + "NOTE: You may need to configure your system "
-                        + "as described in chapter 14.<br>"
-                        + "ERROR MESSAGE: " + e.getMessage();
-                request.setAttribute("errorMessage", errorMessage);
+                        + e.getMessage();
+                request.setAttribute("message", errorMessage);
                 this.log(
                         "Unable to send email. \n"
                         + "Here is the email you tried to send: \n"

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 public class UserDB {
 
-    public static void insert(User user) {
+    public static void insert(User user) throws Exception{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -28,19 +28,10 @@ public class UserDB {
             ps.setString(6, user.getPassword());
             ps.setString(7, user.getSalt());
             ps.executeUpdate();
-            //Get the user ID from the last INSERT statement.
-            /*
-            String identityQuery = "SELECT @@IDENTITY AS IDENTITY";
-            Statement identityStatement = connection.createStatement();
-            ResultSet identityResultSet = identityStatement.executeQuery(identityQuery);
-            identityResultSet.next();
-            long userID = identityResultSet.getLong("IDENTITY");
-            identityResultSet.close();
-            identityStatement.close();
-            */
-            // Set the user ID in the User object
+            
         } catch (SQLException e) {
             System.err.println(e);
+            throw new Exception(e.getMessage());
         } finally {
             DBUtil.closeResultSet(rs);
             DBUtil.closePreparedStatement(ps);
@@ -48,7 +39,7 @@ public class UserDB {
         }
     }
 
-    public static void provideAdminPrivilege(String emailid,int admin) {
+    public static void provideAdminPrivilege(String emailid,int admin) throws Exception{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -69,6 +60,7 @@ public class UserDB {
             ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println(e);
+            throw new Exception(e.getMessage());
         } finally {
             DBUtil.closeResultSet(rs);
             DBUtil.closePreparedStatement(ps);
@@ -76,7 +68,7 @@ public class UserDB {
         }
     }
     
-    public static void resetPassword(String username,String password,String salt) {
+    public static void resetPassword(String username,String password,String salt) throws Exception{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -92,6 +84,7 @@ public class UserDB {
             ps.executeUpdate();
         } catch (SQLException e) {
             System.err.println(e);
+            throw new Exception(e.getMessage());
         } finally {
             DBUtil.closeResultSet(rs);
             DBUtil.closePreparedStatement(ps);
@@ -99,7 +92,7 @@ public class UserDB {
         }
     }
 
-    public static User selectUser(User user) {
+    public static User selectUser(User user) throws Exception{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -124,7 +117,7 @@ public class UserDB {
             return user;
         } catch (SQLException e) {
             System.err.println(e);
-            return null;
+            throw new Exception(e.getMessage());
         } finally {
             DBUtil.closeResultSet(rs);
             DBUtil.closePreparedStatement(ps);
@@ -132,7 +125,7 @@ public class UserDB {
         }
     }
     
-    public static List<User> selectUsers() {
+    public static List<User> selectUsers() throws Exception{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         ResultSet rs = null;
@@ -154,14 +147,14 @@ public class UserDB {
             return users;
         } catch (SQLException e) {
             System.err.println(e);
-            return users;
+            throw new Exception(e.getMessage());
         } finally {
             DBUtil.closeResultSet(rs);
             pool.freeConnection(connection);
         }
     }
     
-    public static boolean loginValidation(String email,String password) {
+    public static boolean loginValidation(String email,String password) throws Exception{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -193,11 +186,11 @@ public class UserDB {
         }
         catch (SQLException e) {
             System.err.println(e);
-            return false;
+            throw new Exception(e.getMessage());
         }
         catch (NoSuchAlgorithmException n){
             System.err.println(n);
-            return false;
+            throw new Exception(n.getMessage());
         }
         finally {
             DBUtil.closeResultSet(rs);

@@ -73,7 +73,11 @@ public class RegistrationServlet extends HttpServlet {
         }
         catch(ParseException p)
         {
-            
+            request.setAttribute("message", p.getMessage());
+            url = "/register.jsp";
+            getServletContext()
+                .getRequestDispatcher(url)
+                .forward(request, response);
         }
         catch(Exception e)
         {
@@ -102,11 +106,8 @@ public class RegistrationServlet extends HttpServlet {
             } catch (MessagingException e) {
                 String errorMessage
                         = "ERROR: Unable to send email. "
-                        + "Check Tomcat logs for details.<br>"
-                        + "NOTE: You may need to configure your system "
-                        + "as described in chapter 14.<br>"
                         + "ERROR MESSAGE: " + e.getMessage();
-                request.setAttribute("errorMessage", errorMessage);
+                request.setAttribute("message", errorMessage);
                 this.log(
                         "Unable to send email. \n"
                         + "Here is the email you tried to send: \n"

@@ -22,7 +22,7 @@ import Library.Models.Book;
  */
 public class BooksDB {
     
-    public static List<BookReview> selectBookReview(String emailID) {
+    public static List<BookReview> selectBookReview(String emailID) throws Exception{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -31,7 +31,7 @@ public class BooksDB {
         ResultSet rs = null;
         
         String searchQuery =
-               "select * from books_review where emailId = ?";
+               "select * from books_review where emailId = ? order by bookid";
         try {
            ps = connection.prepareStatement(searchQuery);
             ps.setString(1,emailID);
@@ -46,14 +46,14 @@ public class BooksDB {
             return reviews;
         } catch (SQLException e) {
             System.err.println(e);
-            return null;
+            throw new Exception(e.getMessage());
         } finally {
             DBUtil.closeResultSet(rs);
             pool.freeConnection(connection);
         }
     }
     
-     public static int addReview(int bookid,String bookname,String emailid,String review ) {
+     public static int addReview(int bookid,String bookname,String emailid,String review ) throws Exception {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection(); 
         PreparedStatement ps = null;
@@ -70,14 +70,14 @@ public class BooksDB {
         }
         catch (SQLException e) {
             System.err.println(e);
-            return 0;
+            throw new Exception(e.getMessage());
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
      }
     
-     public static List<Book> selectBooks() {
+     public static List<Book> selectBooks() throws Exception{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         ArrayList<Book> books = new ArrayList<Book>();
@@ -85,7 +85,7 @@ public class BooksDB {
         ResultSet rs = null;
         
         String searchQuery =
-               "select * from books";
+               "select * from books order by bookid";
         try {
             Statement statement = connection.createStatement();
             rs = statement.executeQuery(searchQuery);
@@ -101,14 +101,14 @@ public class BooksDB {
             return books;
         } catch (SQLException e) {
             System.err.println(e);
-            return null;
+            throw new Exception(e.getMessage());
         } finally {
             DBUtil.closeResultSet(rs);
             pool.freeConnection(connection);
         }
     }
      
-     public static Book selectBook(int id) {
+     public static Book selectBook(int id) throws Exception{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -117,7 +117,7 @@ public class BooksDB {
         ResultSet rs = null;
         
         String searchQuery =
-               "select * from books where bookid = ?";
+               "select * from books where bookid = ? ";
         try {
             ps = connection.prepareStatement(searchQuery);
             ps.setInt(1, id);
@@ -132,14 +132,14 @@ public class BooksDB {
             return book;
         } catch (SQLException e) {
             System.err.println(e);
-            return null;
+            throw new Exception(e.getMessage());
         } finally {
             DBUtil.closeResultSet(rs);
             pool.freeConnection(connection);
         }
     }
      
-     public static int insertBook(Book book) {
+     public static int insertBook(Book book) throws Exception{
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -160,14 +160,14 @@ public class BooksDB {
             return rowcount;
         } catch (SQLException e) {
             System.err.println(e);
-            return rowcount;
+            throw new Exception(e.getMessage());
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
     }
      
-     public static int updateBook(Book book) {
+     public static int updateBook(Book book) throws Exception{
         PreparedStatement ps = null;
         ConnectionPool pool = ConnectionPool.getInstance();   
         Connection connection = pool.getConnection();
@@ -189,14 +189,14 @@ public class BooksDB {
             return updatecount;
         } catch (SQLException e) {
             System.out.println(e);
-            return updatecount;
+            throw new Exception(e.getMessage());
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
      }
      
-     public static int deletebook(int bookid){
+     public static int deletebook(int bookid) throws Exception{
         PreparedStatement ps_1 = null;
         PreparedStatement ps_2 = null;
         int deletecount = 0;
@@ -219,7 +219,7 @@ public class BooksDB {
         } 
         catch (SQLException e) {
             System.out.println(e);
-            return 0;
+            throw new Exception(e.getMessage());
         } 
         finally {
             DBUtil.closePreparedStatement(ps_1);
