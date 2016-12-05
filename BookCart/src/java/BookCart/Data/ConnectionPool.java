@@ -1,4 +1,4 @@
-package Library.Data;
+package BookCart.Data;
 
 import java.sql.*;
 import javax.sql.DataSource;
@@ -19,7 +19,7 @@ public class ConnectionPool {
     private ConnectionPool() {
         try {
             InitialContext ic = new InitialContext();
-            dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/librarymanagement");
+            dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/bookcart");
         } catch (NamingException e) {
             System.err.println(e);
         }

@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Library.Controller;
+package BookCart.Controller;
 
-import Library.Models.User;
+import BookCart.Utility.Utility;
+import BookCart.Data.UserDB;
+import BookCart.Models.User;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,8 +16,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Library.Data.*;
-import Library.Utility.*;
 import javax.mail.MessagingException;
 
 /**

@@ -3,11 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Library.Controller;
+package BookCart.Controller;
 
-import Library.Data.*;
-import Library.Models.*;
-import Library.Utility.Utility;
+import BookCart.Models.BookCart;
+import BookCart.Models.User;
+import BookCart.Models.Book;
+import BookCart.Models.CartItem;
+import BookCart.Models.BookReview;
+import BookCart.Data.BooksDB;
+import BookCart.Data.UserDB;
+import BookCart.Utility.Utility;
 import java.io.IOException;
 import java.util.*;
 import javax.mail.MessagingException;
@@ -101,6 +106,7 @@ public class BooksServlet extends HttpServlet {
        {
             Book book = new Book();
             int id = Integer.parseInt(request.getParameter("bookId"));
+            
             book = BooksDB.selectBook(id);
             request.setAttribute("book", book);
             url="/confirmDelete.jsp";

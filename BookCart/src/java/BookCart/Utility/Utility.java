@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Library.Utility;
+package BookCart.Utility;
 
-import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -91,7 +90,6 @@ public class Utility {
 
         // 4 - send the message
         Transport transport = session.getTransport();
-        //transport.connect("johnsmith@gmail.com", "sesame");
         transport.connect("nbadproject3@gmail.com", "nbad_project3");
         transport.sendMessage(message, message.getAllRecipients());
         transport.close();
